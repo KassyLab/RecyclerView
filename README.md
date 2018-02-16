@@ -1,5 +1,7 @@
 # RecyclerView Android Library
 
+Collection of Adapter and ViewHolder designed for RecyclerView and RecyclerView subclass including OnItemClickListener and onItemLongClickListener.
+
 ## Installation
 
 - Gradle 3.x:
@@ -13,10 +15,6 @@
 		dependencies {
 			compile 'com.kassylab:recyclerview:26.1.0'
 		}
-
-## Usage
-
-Collection of Adapter and ViewHolder designed for RecyclerView and RecyclerView subclass including OnItemClickListener and onItemLongClickListener.
 
 ## Licence
 
