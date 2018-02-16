@@ -1,0 +1,11 @@
+<component name="CopyrightManager">
+  <settings>
+    <module2copyright>
+      <element module="All" copyright="Apache v2" />
+    </module2copyright>
+    <LanguageOptions name="JAVA" />
+    <LanguageOptions name="XML">
+      <option name="fileLocation" value="2" />
+    </LanguageOptions>
+  </settings>
+</component>
