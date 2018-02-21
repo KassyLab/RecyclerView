@@ -16,13 +16,39 @@
 
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'android'
+    bintrayName = 'RecyclerView'
+
+    publishedGroupId = 'com.kassylab'
+    libraryName = 'RecyclerView'
+    artifact = 'recyclerview'
+
+    libraryDescription = 'Collection of Adapter and ViewHolder designed for RecyclerView and RecyclerView subclass including OnItemClickListener and onItemLongClickListener.'
+
+    siteUrl = 'https://github.com/KassyLab/RecyclerView'
+    gitUrl = 'https://github.com/KassyLab/RecyclerView.git'
+
+    libraryVersion = '26.1.0'
+
+    developerId = 'damien-danglard'
+    developerName = 'Damien Danglard'
+    developerEmail = 'damien.danglard@kassylab.com'
+
+    organization = 'kassylab'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 26
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "26.1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -32,6 +58,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    configurations {
+        javadocDeps
+    }
 }
 
 dependencies {
@@ -39,8 +69,14 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 
+    javadocDeps 'com.android.support:recyclerview-v7:26.1.0'
+
     testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+//These two remote files contain Bintray configuration as described above.
+apply from: 'https://raw.githubusercontent.com/KassyLab/template-files/master/android/gradle/install.gradle'
+apply from: 'bintray.gradle'

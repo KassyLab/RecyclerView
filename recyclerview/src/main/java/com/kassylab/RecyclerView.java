@@ -87,8 +87,6 @@ import android.view.accessibility.AccessibilityEvent;
  * <p>
  * When writing a {@link LayoutManager} you almost always want to use layout positions whereas when
  * writing an {@link Adapter}, you probably want to use adapter positions.
- *
- * @attr ref android.support.v7.recyclerview.R.styleable#RecyclerView_layoutManager
  */
 @SuppressWarnings("unused")
 public class RecyclerView extends android.support.v7.widget.RecyclerView {

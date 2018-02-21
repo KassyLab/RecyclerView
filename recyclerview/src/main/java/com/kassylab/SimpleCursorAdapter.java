@@ -58,13 +58,11 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter<MultiValueViewHol
 	/**
 	 * A list of columns containing the data to bind to the UI.
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected int[] mFrom;
 	/**
 	 * A list of View ids representing the views to which the data must be bound.
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected int[] mTo;
 	
@@ -78,6 +76,19 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter<MultiValueViewHol
 	
 	/**
 	 * Constructor the enables auto-requery.
+	 *
+	 * @param context The context where the ListView associated with this
+	 *            SimpleListItemFactory is running
+	 * @param layout resource identifier of a layout file that defines the views
+	 *            for this list item. The layout file should include at least
+	 *            those named views defined in "to"
+	 * @param c The database cursor.  Can be null if the cursor is not available yet.
+	 * @param from A list of column names representing the data to bind to the UI.  Can be null
+	 *            if the cursor is not available yet.
+	 * @param to The views that should display column in the "from" parameter.
+	 *            These should all be TextViews. The first N views in this list
+	 *            are given the values of the first N columns in the from
+	 *            parameter.  Can be null if the cursor is not available yet.
 	 *
 	 * @deprecated This option is discouraged, as it results in Cursor queries
 	 * being performed on the application's UI thread and thus can cause poor

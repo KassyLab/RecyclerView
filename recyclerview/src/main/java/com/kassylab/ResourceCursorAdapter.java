@@ -46,6 +46,7 @@ public abstract class ResourceCursorAdapter<VH extends RecyclerView.ViewHolder> 
 	 * @param layout resource identifier of a layout file that defines the views
 	 *            for this list item.  Unless you override them later, this will
 	 *            define both the item views and the drop down views.
+	 * @param c The cursor from which to get the data.
 	 */
 	@Deprecated
 	public ResourceCursorAdapter(Context context, int layout, Cursor c) {

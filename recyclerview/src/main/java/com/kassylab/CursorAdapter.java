@@ -42,47 +42,38 @@ public abstract class CursorAdapter<VH extends RecyclerView.ViewHolder> extends 
 	
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected boolean mDataValid;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected boolean mAutoRequery;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected Cursor mCursor;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected Context mContext;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected int mRowIDColumn;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected ChangeObserver mChangeObserver;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected DataSetObserver mDataSetObserver;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected CursorFilter mCursorFilter;
 	/**
 	 * This field should be made private, so it is hidden from the SDK.
-	 * {@hide}
 	 */
 	protected FilterQueryProvider mFilterQueryProvider;
 	

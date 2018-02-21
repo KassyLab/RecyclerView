@@ -376,7 +376,7 @@ public class ArrayAdapter<T> extends ResourceAdapter<ArrayAdapter.ViewHolder> im
 	 * @param textArrayResId The identifier of the array to use as the data source.
 	 * @param textViewResId The identifier of the layout used to create views.
 	 *
-	 * @return An ArrayAdapter<CharSequence>.
+	 * @return An {@code ArrayAdapter<CharSequence>}.
 	 */
 	public static @NonNull
 	ArrayAdapter<CharSequence> createFromResource(@NonNull Context context,
