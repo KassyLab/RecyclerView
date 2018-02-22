@@ -1,6 +1,6 @@
 # RecyclerView Android Library
 
-Collection of Adapter and ViewHolder designed for RecyclerView and RecyclerView subclass including OnItemClickListener and OnItemLongClickListener.
+Collection of Adapter and ViewHolder designed for RecyclerView and RecyclerView subclass including OnItemClickListener, OnItemLongClickListener and choice mode.
 
 ## Installation
 

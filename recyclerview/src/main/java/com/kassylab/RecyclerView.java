@@ -29,7 +29,6 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AbsListView;
 import android.widget.Checkable;
-import android.widget.ListAdapter;
 
 /**
  * A flexible view for providing a limited window into a large data set.
@@ -282,7 +281,6 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	 * @see #getCheckedItemPosition()
 	 * @see #getCheckedItemPositions()
 	 * @see #getCheckedItemIds()
-	 * @see AbsListView#getCheckedItemCount()
 	 */
 	public int getCheckedItemCount() {
 		return mCheckedItemCount;
@@ -298,7 +296,6 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	 *         is invalid
 	 *
 	 * @see #setChoiceMode(int)
-	 * @see AbsListView#isItemChecked(int)
 	 */
 	public boolean isItemChecked(int position) {
 		return mChoiceMode != CHOICE_MODE_NONE && mCheckStates != null && mCheckStates.get(position);
@@ -313,7 +310,6 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	 *         {@link #INVALID_POSITION} if nothing is selected
 	 *
 	 * @see #setChoiceMode(int)
-	 * @see AbsListView#getCheckedItemPosition()
 	 */
 	public int getCheckedItemPosition() {
 		if (mChoiceMode == CHOICE_MODE_SINGLE && mCheckStates != null && mCheckStates.size() == 1) {
@@ -331,8 +327,6 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	 *          get(int position) where position is a checked position in the
 	 *          list and false otherwise, or <code>null</code> if the choice
 	 *          mode is set to {@link #CHOICE_MODE_NONE}.
-	 *
-	 * @see AbsListView#getCheckedItemPositions()
 	 */
 	public SparseBooleanArray getCheckedItemPositions() {
 		if (mChoiceMode != CHOICE_MODE_NONE) {
@@ -344,12 +338,10 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	/**
 	 * Returns the set of checked items ids. The result is only valid if the
 	 * choice mode has not been set to {@link #CHOICE_MODE_NONE} and the adapter
-	 * has stable IDs. ({@link ListAdapter#hasStableIds()} == {@code true})
+	 * has stable IDs. ({@link android.support.v7.widget.RecyclerView.Adapter#hasStableIds()} == {@code true})
 	 *
 	 * @return A new array which contains the id of each checked item in the
 	 *         list.
-	 *
-	 * @see AbsListView#getCheckedItemIds()
 	 */
 	public long[] getCheckedItemIds() {
 		if (mChoiceMode == CHOICE_MODE_NONE || mCheckedIdStates == null || getAdapter() == null) {
@@ -369,8 +361,6 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	
 	/**
 	 * Clear any choices previously set
-	 *
-	 * @see AbsListView#clearChoices()
 	 */
 	public void clearChoices() {
 		if (mCheckStates != null) {
@@ -694,5 +684,4 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 			}
 		}
 	}
-	
 }
