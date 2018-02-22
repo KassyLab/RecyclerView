@@ -29,7 +29,7 @@ ext {
     siteUrl = 'https://github.com/KassyLab/RecyclerView'
     gitUrl = 'https://github.com/KassyLab/RecyclerView.git'
 
-    libraryVersion = '26.1.0'
+    libraryVersion = '26.2.0'
 
     developerId = 'damien-danglard'
     developerName = 'Damien Danglard'
@@ -47,8 +47,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 1
-        versionName "26.1.0"
+        versionCode 2
+        versionName "26.2.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
