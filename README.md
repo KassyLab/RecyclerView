@@ -7,13 +7,13 @@ Collection of Adapter and ViewHolder designed for RecyclerView and RecyclerView 
 - Gradle 3.x:
 
 		dependencies {
-			implementation 'com.kassylab:recyclerview:26.1.0'
+			implementation 'com.kassylab:recyclerview:26.2.0'
 		}
 
 - Gradle 2.x:
 
 		dependencies {
-			compile 'com.kassylab:recyclerview:26.1.0'
+			compile 'com.kassylab:recyclerview:26.2.0'
 		}
 
 ## Licence
