@@ -118,10 +118,10 @@ bintray {
         publish = true
         publicDownloadNumbers = true
         version {
-            name = libraryVersion
+            name = android.defaultConfig.versionName
             desc = libraryDescription
             released = new Date()
-            vcsTag = libraryVersion
+            vcsTag = android.defaultConfig.versionName
         }
     }
 }

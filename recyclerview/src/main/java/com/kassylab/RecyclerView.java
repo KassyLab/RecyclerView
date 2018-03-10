@@ -139,6 +139,12 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	OnItemSelectedListener mOnItemSelectedListener;
 	
 	/**
+	 * The listener that receives notifications when an item is clicked if choiceMode is defined to
+	 * {@link #CHOICE_MODE_MULTIPLE} or {@link #CHOICE_MODE_MULTIPLE_MODAL}.
+	 */
+	OnMultiChoiceClickListener mOnMultiChoiceClickListener;
+	
+	/**
 	 * Controls if/how the user may choose/check items in the list
 	 */
 	int mChoiceMode = CHOICE_MODE_NONE;
@@ -186,7 +192,7 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	
 	/**
 	 * Interface definition for a callback to be invoked when an item in this
-	 * AdapterView has been clicked.
+	 * {@link RecyclerView} has been clicked.
 	 */
 	public interface OnItemClickListener {
 		
@@ -297,7 +303,6 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 		void onNothingSelected(RecyclerView parent);
 	}
 	
-	
 	/**
 	 * Register a callback to be invoked when an item in this RecyclerView has
 	 * been selected.
@@ -311,6 +316,49 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	@Nullable
 	public final OnItemSelectedListener getOnItemSelectedListener() {
 		return mOnItemSelectedListener;
+	}
+	
+	/**
+	 * Interface used to allow the creator of a {@link RecyclerView} to run some code when an
+	 * item in a multi-choice {@link RecyclerView} is clicked.
+	 */
+	public interface OnMultiChoiceClickListener {
+		/**
+		 * This method will be invoked when an item in the {@link RecyclerView} is clicked,
+		 * only if {@link #getChoiceMode()} is defined to {@link #CHOICE_MODE_MULTIPLE}
+		 * or {@link #CHOICE_MODE_MULTIPLE_MODAL}.
+		 *
+		 * @see #setChoiceMode(int)
+		 * @see #CHOICE_MODE_MULTIPLE
+		 * @see #CHOICE_MODE_MULTIPLE_MODAL
+		 *
+		 * @param parent The RecyclerView where the selection happened
+		 * @param view The view within the RecyclerView that was clicked
+		 * @param position The position of the view in the adapter
+		 * @param id The row id of the item that is selected
+		 * @param isChecked {@code true} if the click checked the item, else
+		 *                  {@code false}
+		 */
+		void onClick(RecyclerView parent, com.kassylab.ViewHolder view, int position, long id, boolean isChecked);
+	}
+	
+	/**
+	 * Register a callback to be invoked when an item in this AdapterView has
+	 * been clicked.
+	 *
+	 * @param listener The callback that will be invoked.
+	 */
+	public void setOnMultiChoiceClickListener(@Nullable OnMultiChoiceClickListener listener) {
+		mOnMultiChoiceClickListener = listener;
+	}
+	
+	/**
+	 * @return The callback to be invoked with an item in this AdapterView has
+	 *         been clicked, or null id no callback has been set.
+	 */
+	@Nullable
+	public final OnMultiChoiceClickListener getOnMultiChoiceClickListener() {
+		return mOnMultiChoiceClickListener;
 	}
 	
 	
@@ -543,6 +591,9 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 					mMultiChoiceModeCallback.onItemCheckedStateChanged(mChoiceActionMode,
 							position, id, checked);
 					dispatchItemClick = false;
+				}
+				if (mOnMultiChoiceClickListener != null) {
+					mOnMultiChoiceClickListener.onClick(this, holder, position, id, checked);
 				}
 				checkedStateChanged = true;
 			} else if (mChoiceMode == CHOICE_MODE_SINGLE) {
