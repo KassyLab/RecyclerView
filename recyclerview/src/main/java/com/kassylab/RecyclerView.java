@@ -27,7 +27,6 @@ import android.view.MenuItem;
 import android.view.SoundEffectConstants;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.AbsListView;
 import android.widget.Checkable;
 
 /**
@@ -133,6 +132,11 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	 * The listener that receives notifications when an item is long clicked.
 	 */
 	OnItemLongClickListener mOnItemLongClickListener;
+	
+	/**
+	 * The listener that receives notifications when an item is selected.
+	 */
+	OnItemSelectedListener mOnItemSelectedListener;
 	
 	/**
 	 * Controls if/how the user may choose/check items in the list
@@ -262,6 +266,53 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 		return mOnItemLongClickListener;
 	}
 	
+	/**
+	 * Interface definition for a callback to be invoked when
+	 * an item in this view has been selected.
+	 */
+	public interface OnItemSelectedListener {
+		/**
+		 * <p>Callback method to be invoked when an item in this view has been
+		 * selected. This callback is invoked only when the newly selected
+		 * position is different from the previously selected position or if
+		 * there was no selected item.</p>
+		 *
+		 * Impelmenters can call getItemAtPosition(position) if they need to access the
+		 * data associated with the selected item.
+		 *
+		 * @param parent The RecyclerView where the selection happened
+		 * @param view The view within the RecyclerView that was clicked
+		 * @param position The position of the view in the adapter
+		 * @param id The row id of the item that is selected
+		 */
+		void onItemSelected(RecyclerView parent, com.kassylab.ViewHolder view, int position, long id);
+		
+		/**
+		 * Callback method to be invoked when the selection disappears from this
+		 * view. The selection can disappear for instance when touch is activated
+		 * or when the adapter becomes empty.
+		 *
+		 * @param parent The RecyclerView that now contains no selected item.
+		 */
+		void onNothingSelected(RecyclerView parent);
+	}
+	
+	
+	/**
+	 * Register a callback to be invoked when an item in this RecyclerView has
+	 * been selected.
+	 *
+	 * @param listener The callback that will run
+	 */
+	public void setOnItemSelectedListener(@Nullable OnItemSelectedListener listener) {
+		mOnItemSelectedListener = listener;
+	}
+	
+	@Nullable
+	public final OnItemSelectedListener getOnItemSelectedListener() {
+		return mOnItemSelectedListener;
+	}
+	
 	
 	
 	
@@ -389,7 +440,7 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 		if (value && mChoiceMode == CHOICE_MODE_MULTIPLE_MODAL && mChoiceActionMode == null) {
 			if (mMultiChoiceModeCallback == null ||
 					!mMultiChoiceModeCallback.hasWrappedCallback()) {
-				throw new IllegalStateException("AbsListView: attempted to start selection mode " +
+				throw new IllegalStateException("RecyclerView: attempted to start selection mode " +
 						"for CHOICE_MODE_MULTIPLE_MODAL but no choice mode callback was " +
 						"supplied. Call setMultiChoiceModeListener to set a callback.");
 			}
@@ -550,21 +601,6 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 				>= android.os.Build.VERSION_CODES.HONEYCOMB) {
 			holder.itemView.setActivated(mCheckStates.get(position));
 		}
-		
-		/*final int firstPos = mFirstPosition;
-		final int count = getChildCount();
-		final boolean useActivated = getContext().getApplicationInfo().targetSdkVersion
-				>= android.os.Build.VERSION_CODES.HONEYCOMB;
-		for (int i = 0; i < count; i++) {
-			final View child = getChildAt(i);
-			final int position = firstPos + i;
-			
-			if (child instanceof Checkable) {
-				((Checkable) child).setChecked(mCheckStates.get(position));
-			} else if (useActivated) {
-				child.setActivated(mCheckStates.get(position));
-			}
-		}*/
 	}
 	
 	/**
@@ -607,7 +643,7 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	}
 	
 	/**
-	 * Set a {@link AbsListView.MultiChoiceModeListener} that will manage the lifecycle of the
+	 * Set a {@link MultiChoiceModeListener} that will manage the lifecycle of the
 	 * selection {@link ActionMode}. Only used when the choice mode is set to
 	 * {@link #CHOICE_MODE_MULTIPLE_MODAL}.
 	 *
@@ -615,7 +651,7 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	 *
 	 * @see #setChoiceMode(int)
 	 */
-	public void setMultiChoiceModeListener(AbsListView.MultiChoiceModeListener listener) {
+	public void setMultiChoiceModeListener(MultiChoiceModeListener listener) {
 		if (mMultiChoiceModeCallback == null) {
 			mMultiChoiceModeCallback = new MultiChoiceModeWrapper();
 		}
@@ -626,11 +662,29 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 	
 	
 	
+	/**
+	 * A MultiChoiceModeListener receives events for {@link #CHOICE_MODE_MULTIPLE_MODAL}.
+	 * It acts as the {@link ActionMode.Callback} for the selection mode and also receives
+	 * {@link #onItemCheckedStateChanged(ActionMode, int, long, boolean)} events when the user
+	 * selects and deselects list items.
+	 */
+	public interface MultiChoiceModeListener extends ActionMode.Callback {
+		/**
+		 * Called when an item is checked or unchecked during selection mode.
+		 *
+		 * @param mode The {@link ActionMode} providing the selection mode
+		 * @param position Adapter position of the item that was checked or unchecked
+		 * @param id Adapter ID of the item that was checked or unchecked
+		 * @param checked <code>true</code> if the item is now checked, <code>false</code>
+		 *                if the item is now unchecked.
+		 */
+		void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked);
+	}
 	
-	class MultiChoiceModeWrapper implements AbsListView.MultiChoiceModeListener {
-		private AbsListView.MultiChoiceModeListener mWrapped;
+	class MultiChoiceModeWrapper implements MultiChoiceModeListener {
+		private MultiChoiceModeListener mWrapped;
 		
-		void setWrapped(AbsListView.MultiChoiceModeListener wrapped) {
+		void setWrapped(MultiChoiceModeListener wrapped) {
 			mWrapped = wrapped;
 		}
 		
