@@ -22,8 +22,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 3
-        versionName "26.2.1"
+        versionCode 4
+        versionName "26.2.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -47,7 +47,9 @@ ext {
     libraryName = 'RecyclerView'
     artifact = 'recyclerview'
 
-    libraryDescription = 'Collection of Adapter and ViewHolder designed for RecyclerView and RecyclerView subclass including OnItemClickListener, OnItemLongClickListener and OnItemSelectedListener.'
+    libraryDescription = 'Collection of Adapter and ViewHolder designed for RecyclerView and ' +
+            'RecyclerView subclass including OnItemClickListener, OnItemLongClickListener, ' +
+            'OnMultiChoiceClickListener and OnItemSelectedListener.'
 
     siteUrl = 'https://github.com/KassyLab/RecyclerView'
     gitUrl = 'https://github.com/KassyLab/RecyclerView.git'
