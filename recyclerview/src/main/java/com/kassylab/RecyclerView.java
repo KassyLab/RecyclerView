@@ -548,6 +548,7 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 			/*mDataChanged = true;
 			rememberSyncState();*/
 			requestLayout();
+			updateOnScreenCheckedViews(holder, position);
 		}
 	}
 	
