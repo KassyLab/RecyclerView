@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import org.apache.tools.ant.filters.ReplaceTokens
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
@@ -26,7 +28,6 @@ android {
         versionName "26.2.3"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        setProperty("archivesBaseName", project.name + "-v" + versionName)
     }
     buildTypes {
         release {
@@ -81,6 +82,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
+
+task updateReadme(type: Copy) {
+    from('..')
+    into('..')
+    include('README-template.md')
+    rename ('README-template.md', 'README.md')
+    filter (ReplaceTokens, tokens: [version: android.defaultConfig.versionName])
+}
+preBuild.finalizedBy(updateReadme)
 
 //These two remote files contain Bintray configuration as described above.
 apply from: 'https://raw.githubusercontent.com/KassyLab/template-files/master/android/gradle/install.gradle'
