@@ -548,7 +548,11 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
 			/*mDataChanged = true;
 			rememberSyncState();*/
 			requestLayout();
-			updateOnScreenCheckedViews(holder, position);
+			
+			ViewHolder viewHolder = findViewHolderForAdapterPosition(position);
+			if (viewHolder != null) {
+				updateOnScreenCheckedViews((com.kassylab.ViewHolder) viewHolder, position);
+			}
 		}
 	}
 	

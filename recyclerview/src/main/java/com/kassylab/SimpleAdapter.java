@@ -100,6 +100,8 @@ public class SimpleAdapter extends ResourceAdapter<MultiValueViewHolder> impleme
 	
 	@Override
 	public void onBindViewHolder(MultiValueViewHolder holder, int position) {
+		super.onBindViewHolder(holder, position);
+		
 		final Map dataSet = mData.get(position);
 		if (dataSet == null) {
 			return;

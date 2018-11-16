@@ -21,6 +21,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.ref.WeakReference;
+
 /**
  * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
  *
@@ -42,7 +44,7 @@ public abstract class ViewHolder extends RecyclerView.ViewHolder {
 	/**
 	 * Is set when VH is bound from the adapter.
 	 */
-	private com.kassylab.RecyclerView mOwnerRecyclerView;
+	WeakReference<com.kassylab.RecyclerView> mOwnerRecyclerView;
 	
 	public ViewHolder(View itemView) {
 		this(null, itemView);
@@ -52,14 +54,15 @@ public abstract class ViewHolder extends RecyclerView.ViewHolder {
 		super(itemView);
 		
 		if (parent != null && parent instanceof com.kassylab.RecyclerView) {
-			mOwnerRecyclerView = (com.kassylab.RecyclerView) parent;
+			mOwnerRecyclerView = new WeakReference<>((com.kassylab.RecyclerView) parent);
 		}
 		
 		itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mOwnerRecyclerView != null) {
-					mOwnerRecyclerView.performItemClick(ViewHolder.this, getAdapterPosition(), getItemId());
+				if (mOwnerRecyclerView != null && mOwnerRecyclerView.get() != null) {
+					mOwnerRecyclerView.get().performItemClick(
+							ViewHolder.this, getAdapterPosition(), getItemId());
 				}
 			}
 		});

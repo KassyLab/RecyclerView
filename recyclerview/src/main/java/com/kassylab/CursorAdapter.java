@@ -37,7 +37,7 @@ import android.widget.Filterable;
  * columns.
  */
 @SuppressWarnings({"unused", "WeakerAccess", "deprecation"})
-public abstract class CursorAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>
+public abstract class CursorAdapter<VH extends ViewHolder> extends Adapter<VH>
 		implements Filterable, CursorFilter.CursorFilterClient {
 	
 	/**
@@ -204,6 +204,8 @@ public abstract class CursorAdapter<VH extends RecyclerView.ViewHolder> extends 
 	
 	@Override
 	public void onBindViewHolder(VH holder, int position) {
+		super.onBindViewHolder(holder, position);
+		
 		if (!mDataValid) {
 			throw new IllegalStateException("this should only be called when the cursor is valid");
 		}

@@ -28,7 +28,7 @@ import android.view.ViewGroup;
  * the XML file that defines the appearance of the views.
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-public abstract class ResourceCursorAdapter<VH extends RecyclerView.ViewHolder> extends CursorAdapter<VH> {
+public abstract class ResourceCursorAdapter<VH extends ViewHolder> extends CursorAdapter<VH> {
 	
 	private int mResource;
 	

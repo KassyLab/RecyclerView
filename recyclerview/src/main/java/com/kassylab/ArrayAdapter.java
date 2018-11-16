@@ -326,6 +326,8 @@ public class ArrayAdapter<T> extends ResourceAdapter<ArrayAdapter.ViewHolder> im
 	
 	@Override
 	public void onBindViewHolder(ArrayAdapter.ViewHolder holder, int position) {
+		super.onBindViewHolder(holder, position);
+		
 		final T item = mObjects.get(position);
 		if (item instanceof CharSequence) {
 			holder.text.setText((CharSequence) item);

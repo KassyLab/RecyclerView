@@ -21,7 +21,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
@@ -182,7 +181,7 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter<MultiValueViewHol
 	 *
 	 * @return a ViewBinder or null if the binder does not exist
 	 *
-	 * @see #onBindViewHolder(RecyclerView.ViewHolder, Cursor)
+	 * @see #onBindViewHolder(ViewHolder, Cursor)
 	 * @see #setViewBinder(ViewBinder)
 	 */
 	public ViewBinder getViewBinder() {
@@ -195,7 +194,7 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter<MultiValueViewHol
 	 * @param viewBinder the binder used to bind data to views, can be null to
 	 *        remove the existing binder
 	 *
-	 * @see #onBindViewHolder(RecyclerView.ViewHolder, Cursor)
+	 * @see #onBindViewHolder(ViewHolder, Cursor)
 	 * @see #getViewBinder()
 	 */
 	public void setViewBinder(ViewBinder viewBinder) {
@@ -396,7 +395,7 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter<MultiValueViewHol
 	 * change the way binding occurs for views supported by
 	 * SimpleCursorAdapter.
 	 *
-	 * @see #onBindViewHolder(RecyclerView.ViewHolder, Cursor)
+	 * @see #onBindViewHolder(ViewHolder, Cursor)
 	 * @see #setViewImage(ImageView, String)
 	 * @see #setViewText(TextView, String)
 	 */

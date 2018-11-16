@@ -18,7 +18,6 @@ package com.kassylab;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ import android.view.ViewGroup;
  * the XML file that defines the appearance of the views.
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-public abstract class ResourceAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class ResourceAdapter<VH extends ViewHolder> extends Adapter<VH> {
 	
 	/**
 	 * The resource indicating what views to inflate to display the content of this
